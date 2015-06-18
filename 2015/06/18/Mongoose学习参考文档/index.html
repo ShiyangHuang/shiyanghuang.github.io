@@ -1,0 +1,569 @@
+
+ <!DOCTYPE HTML>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Mongoose学习参考文档 | Huang Shiyang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Huang Shiyang">
+    
+
+    
+    <meta name="description" content="Mongoose学习参考文档前言：本学习参考文档仅供参考，如有问题，师请雅正
+一、快速通道1.1 名词解释Schema  ：  一种以文件形式存储的数据库模型骨架，不具备数据库的操作能力
+Model   ：  由Schema发布生成的模型，具有抽象属性和行为的数据库操作对
+Entity  ：  由Model创建的实体，他的操作也会影响数据库
+注意：
+1.本学习文档采用严格命名方式来区别不同对象，例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mongoose学习参考文档">
+<meta property="og:url" content="https://huangshiyang.com/2015/06/18/Mongoose学习参考文档/index.html">
+<meta property="og:site_name" content="Huang Shiyang">
+<meta property="og:description" content="Mongoose学习参考文档前言：本学习参考文档仅供参考，如有问题，师请雅正
+一、快速通道1.1 名词解释Schema  ：  一种以文件形式存储的数据库模型骨架，不具备数据库的操作能力
+Model   ：  由Schema发布生成的模型，具有抽象属性和行为的数据库操作对
+Entity  ：  由Model创建的实体，他的操作也会影响数据库
+注意：
+1.本学习文档采用严格命名方式来区别不同对象，例">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mongoose学习参考文档">
+<meta name="twitter:description" content="Mongoose学习参考文档前言：本学习参考文档仅供参考，如有问题，师请雅正
+一、快速通道1.1 名词解释Schema  ：  一种以文件形式存储的数据库模型骨架，不具备数据库的操作能力
+Model   ：  由Schema发布生成的模型，具有抽象属性和行为的数据库操作对
+Entity  ：  由Model创建的实体，他的操作也会影响数据库
+注意：
+1.本学习文档采用严格命名方式来区别不同对象，例">
+
+    
+    <link rel="alternative" href="/#" title="Huang Shiyang" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="https://huangshiyang.com"><img src="/img/nav-logo.gif" alt="Huang Shiyang" title="Huang Shiyang"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Huang Shiyang">Huang Shiyang</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:huangshiyang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/18/Mongoose学习参考文档/" title="Mongoose学习参考文档" itemprop="url">Mongoose学习参考文档</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Huang Shiyang" target="_blank" itemprop="author">Internet</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-18T04:12:46.000Z" itemprop="datePublished"> Published 2015-06-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mongoose学习参考文档"><span class="toc-number">1.</span> <span class="toc-text">Mongoose学习参考文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、快速通道"><span class="toc-number">1.1.</span> <span class="toc-text">一、快速通道</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1_名词解释"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 名词解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2_准备工作"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、新手指引"><span class="toc-number">1.3.</span> <span class="toc-text">二、新手指引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_Schema——纯洁的数据库原型"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Schema——纯洁的数据库原型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1_什么是Schema"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1.1 什么是Schema</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2_如何定义Schema"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">1.2 如何定义Schema</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3_什么是Schema-Type"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">1.3 什么是Schema.Type</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4_Schema-Types"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">1.4 Schema.Types</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5_关于Buffer"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">1.5 关于Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6_关于Mixed"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">1.6 关于Mixed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7_关于ObjectId"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">1.7 关于ObjectId</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-8_关于Array"><span class="toc-number">1.3.1.8.</span> <span class="toc-text">1.8 关于Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-9_附言"><span class="toc-number">1.3.1.9.</span> <span class="toc-text">1.9 附言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_Schema的扩展"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Schema的扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_实例方法"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">2.1 实例方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_静态方法"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">2.2 静态方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_索引"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">2.3 索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4_虚拟属性"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">2.4 虚拟属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5_配置项"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">2.5 配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-1_safe——安全属性（默认安全）"><span class="toc-number">1.3.2.5.1.</span> <span class="toc-text">2.5.1 safe——安全属性（默认安全）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-2_strict——严格配置（默认启用）"><span class="toc-number">1.3.2.5.2.</span> <span class="toc-text">2.5.2 strict——严格配置（默认启用）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-3_shardKey"><span class="toc-number">1.3.2.5.3.</span> <span class="toc-text">2.5.3 shardKey</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-4_capped——上限设置"><span class="toc-number">1.3.2.5.4.</span> <span class="toc-text">2.5.4 capped——上限设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-5_versionKey——版本锁"><span class="toc-number">1.3.2.5.5.</span> <span class="toc-text">2.5.5 versionKey——版本锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-6_autoIndex——自动索引"><span class="toc-number">1.3.2.5.6.</span> <span class="toc-text">2.5.6 autoIndex——自动索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_Documents"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Documents</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1_查询"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">3.1 查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2_更新"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">3.2 更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3_新增"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">3.3 新增</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4_删除"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">3.4 删除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Sub_Docs"><span class="toc-number">1.3.4.</span> <span class="toc-text">4.Sub Docs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1_查询子文档"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">4.1 查询子文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2_新增、删除、更新"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">4.2 新增、删除、更新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Model"><span class="toc-number">1.3.5.</span> <span class="toc-text">5.Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1_什么是Model"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">5.1 什么是Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2_如何创建Model"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">5.2 如何创建Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2_操作Model"><span class="toc-number">1.3.5.3.</span> <span class="toc-text">5.2 操作Model</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Query"><span class="toc-number">1.3.6.</span> <span class="toc-text">6.Query</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1_查询的方式"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">6.1 查询的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-1_直接查询"><span class="toc-number">1.3.6.1.1.</span> <span class="toc-text">6.1.1 直接查询</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-2_链式查询"><span class="toc-number">1.3.6.1.2.</span> <span class="toc-text">6.1.2 链式查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Validation"><span class="toc-number">1.3.7.</span> <span class="toc-text">7.Validation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1_验证器"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">7.1 验证器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2_验证失败"><span class="toc-number">1.3.7.2.</span> <span class="toc-text">7.2 验证失败</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Middleware中间件"><span class="toc-number">1.3.8.</span> <span class="toc-text">8.Middleware中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1_什么是中间件"><span class="toc-number">1.3.8.1.</span> <span class="toc-text">8.1 什么是中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2_中间件的分类"><span class="toc-number">1.3.8.2.</span> <span class="toc-text">8.2 中间件的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#8-2-1_Serial串行"><span class="toc-number">1.3.8.2.1.</span> <span class="toc-text">8.2.1 Serial串行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-2-2_Parallel并行"><span class="toc-number">1.3.8.2.2.</span> <span class="toc-text">8.2.2 Parallel并行</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3_中间件特点"><span class="toc-number">1.3.8.3.</span> <span class="toc-text">8.3 中间件特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-4_使用范畴"><span class="toc-number">1.3.8.4.</span> <span class="toc-text">8.4 使用范畴</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Mongoose学习参考文档">Mongoose学习参考文档</h1><p>前言：本学习参考文档仅供参考，如有问题，师请雅正</p>
+<h2 id="一、快速通道">一、快速通道</h2><h3 id="1-1_名词解释">1.1 名词解释</h3><p>Schema  ：  一种以文件形式存储的数据库模型骨架，不具备数据库的操作能力</p>
+<p>Model   ：  由Schema发布生成的模型，具有抽象属性和行为的数据库操作对</p>
+<p>Entity  ：  由Model创建的实体，他的操作也会影响数据库</p>
+<p>注意：</p>
+<p>1.本学习文档采用严格命名方式来区别不同对象，例如：</p>
+<p>var PersonSchema;   //Person的文本属性<br>var PersonModel;    //Person的数据库模型<br>var PersonEntity;   //Person实体<br>2.Schema、Model、Entity的关系请牢记，Schema生成Model，Model创造Entity，Model和Entity都可对数据库操作造成影响，但Model比Entity更具操作性。</p>
+<h2 id="1-2_准备工作">1.2 准备工作</h2><p>1.首先你必须安装MongoDB和NodeJS</p>
+<p>2.在项目只能够创建一个数据库连接，如下:</p>
+<p>var mongoose = require(‘mongoose’);    //引用mongoose模块<br>var db = mongoose.createConnection(‘localhost’,’test’); //创建一个数据库连接<br>3.打开本机localhost的test数据库时，我们可以监测是否有异常</p>
+<p>db.on(‘error’,console.error.bind(console,’连接错误:’));<br>db.once(‘open’,function(){<br>//一次打开记录<br>});<br>注意：</p>
+<p>成功开启数据库后，就可以执行数据库相应操作，假设以下代码都在回调中处理</p>
+<p>4.定义一个Schema</p>
+<p>var PersonSchema = new mongoose.Schema({<br>name:String   //定义一个属性name，类型为String<br>});<br>5.将该Schema发布为Model</p>
+<p>var PersonModel = db.model(‘Person’,PersonSchema);<br>//如果该Model已经发布，则可以直接通过名字索引到，如下：<br>//var PersonModel = db.model(‘Person’);<br>//如果没有发布，上一段代码将会异常<br>6.用Model创建Entity</p>
+<p>var personEntity = new PersonModel({name:’Krouky’});<br>//打印这个实体的名字看看<br>console.log(personEntity.name); //Krouky<br>7.我们甚至可以为此Schema创建方法</p>
+<p>//为Schema模型追加speak方法<br>PersonSchema.methos.speak = function(){<br>console.log(‘我的名字叫’+this.name);<br>}<br>var PersonModel = db.model(‘Person’,PersonSchema);<br>var personEntity = new PersonModel({name:’Krouky’});<br>personEntity.speak();//我的名字叫Krouky<br>8.Entity是具有具体的数据库操作CRUD的</p>
+<p>personEntity.save();  //执行完成后，数据库就有该数据了<br>9.如果要执行查询，需要依赖Model，当然Entity也是可以做到的</p>
+<p>PersonModel.find(function(err,persons){<br>//查询到的所有person<br>});<br>注意：</p>
+<ol>
+<li><p>具体的如何配置Schema、Model以及Model和Entity的相关操作，我们会在后面进行</p>
+</li>
+<li><p>Model和Entity都有能影响数据库的操作，但仍有区别，后面我们也会做解释</p>
+</li>
+</ol>
+<h2 id="二、新手指引">二、新手指引</h2><p>如果您还不清楚Mongoose是如何工作的，请参看第一章快速通道快速浏览他的用法吧</p>
+<h3 id="1-_Schema——纯洁的数据库原型">1. Schema——纯洁的数据库原型</h3><h4 id="1-1_什么是Schema">1.1 什么是Schema</h4><p>我理解Schema仅仅只是一断代码，他书写完成后程序依然无法使用，更无法通往数据库端<br>他仅仅只是数据库模型在程序片段中的一种表现，或者是数据属性模型</p>
+<h4 id="1-2_如何定义Schema">1.2 如何定义Schema</h4><p>var BlogSchema = new Schema({<br>title:String,<br>author:String<br>//new Schema()中传入一个JSON对象，该对象形如 xxx:yyyy ,<br>/xxx是一个字符串，定义了属性，yyy是一个Schema.Type，定义了属性类型<br>});</p>
+<h4 id="1-3_什么是Schema-Type">1.3 什么是Schema.Type</h4><p>Schema.Type是由Mongoose内定的一些数据类型，基本数据类型都在其中，他也内置了一些Mongoose特有的Schema.Type。当然，你也可以自定义Schema.Type，只有满足Schema.Type的类型才能定义在Schema内。</p>
+<h4 id="1-4_Schema-Types">1.4 Schema.Types</h4><p>NodeJS中的基本数据类型都属于Schema.Type，另外Mongoose还定义了自己的类型</p>
+<p>//举例：<br>var ExampleSchema = new Schema({<br>name:String,<br>binary:Buffer,<br>living:Boolean,<br>updated:Date,<br>age:Number,<br>mixed:Schema.Types.Mixed, //该混合类型等同于nested<br>_id:Schema.Types.ObjectId,  //主键<br>_fk:Schema.Types.ObjectId,  //外键<br>array:[],<br>arrOfString:[String],<br>arrOfNumber:[Number],<br>arrOfDate:[Date],<br>arrOfBuffer:[Buffer],<br>arrOfBoolean:[Boolean],<br>arrOfMixed:[Schema.Types.Mixed],<br>arrOfObjectId:[Schema.Types.ObjectId]<br>nested:{<br>stuff:String,<br>}<br>});</p>
+<h4 id="1-5_关于Buffer">1.5 关于Buffer</h4><p>Buffer和ArrayBuffer是Nodejs两种隐藏的对象，相关内容请查看NodeJS-API</p>
+<h4 id="1-6_关于Mixed">1.6 关于Mixed</h4><p>Schema.Types.Mixed是Mongoose定义个混合类型，该混合类型如果未定义具体形式。因此,如果定义具体内容，就直接使用{}来定义，以下两句等价</p>
+<p>var AnySchema = new Schema({any:{}});<br>var AnySchema = new Schema({any:Schema.Types.Mixed});<br>混合类型因为没有特定约束，因此可以任意修改，一旦修改了原型，则必须调用markModified()</p>
+<p>person.anything = {x:[3,4,{y:’change’}]}<br>person.markModified(‘anything’);//传入anything，表示该属性类型发生变化<br>person.save();</p>
+<h4 id="1-7_关于ObjectId">1.7 关于ObjectId</h4><p>主键，一种特殊而且非常重要的类型，每个Schema都会默认配置这个属性，属性名为_id，除非自己定义，方可覆盖</p>
+<p>var mongoose = require(‘mongoose’);<br>var ObjectId = mongoose.Schema.Types.ObjectId;<br>var StudentSchema = new Schema({}); //默认会有_id:ObjectId<br>var TeacherSchema = new Schema({id:ObjectId});//只有id:ObjectId<br>该类型的值由系统自己生成，从某种意义上几乎不会重复，生成过程比较复杂，有兴趣的朋友可以查看源码。</p>
+<h4 id="1-8_关于Array">1.8 关于Array</h4><p>Array在JavaScript编程语言中并不是数组，而是集合，因此里面可以存入不同的值，以下代码等价：</p>
+<p>var ExampleSchema1 = new Schema({array:[]});<br>var ExampleSchema2 = new Schema({array:Array});<br>var ExampleSchema3 = new Schema({array:[Schema.Types.Mixed]});<br>var ExampleSchema4 = new Schema({array:[{}]});</p>
+<h4 id="1-9_附言">1.9 附言</h4><p>Schema不仅定义了文档结构和使用性能，还可以有扩展插件、实例方法、静态方法、复合索引、文档生命周期钩子</p>
+<p>Schema可以定义插件，并且插件具有良好的可拔插性，请有兴趣的读者继续往后阅读或者查阅官方资料。</p>
+<h3 id="2-_Schema的扩展">2. Schema的扩展</h3><h4 id="2-1_实例方法">2.1 实例方法</h4><p>有的时候，我们创造的Schema不仅要为后面的Model和Entity提供公共的属性，还要提供公共的方法。</p>
+<p>下面例子比快速通道的例子更加高级，可以进行高级扩展：</p>
+<p>var PersonSchema = new Schema({name:String,type:String});<br>//查询类似数据<br>PersonSchema.methods.findSimilarTypes = function(cb){<br>return this.model(‘Person’).find({type:this.type},cb);<br>}<br>使用如下：</p>
+<p>var PersonModel = mongoose.model(‘Person’,PersonSchema);<br>var krouky = new PersonSchema({name:’krouky’,type:’前端工程师’});<br>krouky.findSimilarTypes(function(err,persons){<br>//persons中就能查询到其他前端工程师<br>});</p>
+<h4 id="2-2_静态方法">2.2 静态方法</h4><p>静态方法在Model层就能使用，如下：</p>
+<p>PersonSchema.statics.findByName = function(name,cb){<br>this.find({name:new RegExp(name,’i’),cb});<br>}<br>var PersonModel = mongoose.model(‘Person’,PersonSchema);<br>PersonModel.findByName(‘krouky’,function(err,persons){<br>//找到所有名字叫krouky的人<br>});</p>
+<h4 id="2-3_索引">2.3 索引</h4><p>索引或者复合索引能让搜索更加高效，默认索引就是主键索引ObjectId，属性名为_id， 索引会作为一个专题来讲解</p>
+<h4 id="2-4_虚拟属性">2.4 虚拟属性</h4><p>Schema中如果定义了虚拟属性，那么该属性将不写入数据库，例如：</p>
+<p>var PersonSchema = new Schema({<br>name:{<br>first:String,<br>last:String<br>}<br>});<br>var PersonModel = mongoose.model(‘Person’,PersonSchema);<br>var krouky = new PersonModel({<br>name:{first:’krouky’,last:’han’}<br>});<br>如果每次想使用全名就得这样</p>
+<p>console.log(krouky.name.first + ‘ ‘ + krouky.name.last);<br>显然这是很麻烦的，我们可以定义虚拟属性：</p>
+<p>PersonSchema.virtual(‘name.full’).get(function(){<br>return this.name.first + ‘ ‘ + this.name.last;<br>});<br>那么就能用krouky.name.full来调用全名了，反之如果知道full，也可以反解first和last属性</p>
+<p>PersonSchema.virtual(‘name.full’).set(function(name){<br>var split = name.split(‘ ‘);<br>this.name.first = split[0];<br>this.name.last = split[1];<br>});<br>var PersonModel = mongoose.model(‘Person’,PersonSchema);<br>var krouky = new PersonModel({});<br>krouky.name.full = ‘krouky han’;//会被自动分解<br>console.log(krouky.name.first);//krouky</p>
+<h4 id="2-5_配置项">2.5 配置项</h4><p>在使用new Schema(config)时，我们可以追加一个参数options来配置Schema的配置，形如：</p>
+<p>var ExampleSchema = new Schema(config,options);<br>或者使用</p>
+<p>var ExampleSchema = new Schema(config);<br>ExampleSchema.set(option,value);<br>可供配置项有：safe、strict、capped、versionKey、autoIndex</p>
+<h5 id="2-5-1_safe——安全属性（默认安全）">2.5.1 safe——安全属性（默认安全）</h5><p>一般可做如下配置：</p>
+<p>new Schema({…},{safe:true});<br>当然我们也可以这样</p>
+<p>new Schema({…},{safe:{j:1,w:2,wtimeout:10000}});<br>j表示做1份日志，w表示做2个副本（尚不明确），超时时间10秒</p>
+<h5 id="2-5-2_strict——严格配置（默认启用）">2.5.2 strict——严格配置（默认启用）</h5><p>确保Entity的值存入数据库前会被自动验证，如果你没有充足的理由，请不要停用，例子：</p>
+<p>var ThingSchema = new Schema({a:String});<br>var ThingModel = db.model(‘Thing’,SchemaSchema);<br>var thing = new Thing({iAmNotInTheThingSchema:true});<br>thing.save();//iAmNotInTheThingSchema这个属性将无法被存储<br>如果取消严格选项，iAmNotInTheThingSchema将会被存入数据库</p>
+<p>该选项也可以在构造实例时使用，例如：</p>
+<p>var ThingModel = db.model(‘Thing’);<br>var thing1 = new ThingModel(doc,true);  //启用严格<br>var thing2 = new ThingModel(doc,false); //禁用严格<br>注意：</p>
+<p>strict也可以设置为throw，表示出现问题将会抛出错误</p>
+<h5 id="2-5-3_shardKey">2.5.3 shardKey</h5><p>需要mongodb做分布式，才会使用该属性</p>
+<h5 id="2-5-4_capped——上限设置">2.5.4 capped——上限设置</h5><p>如果有数据库的批量操作，该属性能限制一次操作的量，例如：</p>
+<p>new Schema({…},{capped:1024});  //一次操作上线1024条数据<br>当然该参数也可是JSON对象，包含size、max、autiIndexId属性</p>
+<p>new Schema({…},{capped:{size:1024,max:100,autoIndexId:true}});</p>
+<h5 id="2-5-5_versionKey——版本锁">2.5.5 versionKey——版本锁</h5><p>版本锁是Mongoose默认配置（__v属性）的，如果你想自己定制，如下：</p>
+<p>new Schema({…},{versionKey:’<strong>someElse’});<br>此时存入数据库的版本锁就不是</strong>v属性，而是__someElse，相当于是给版本锁取名字。</p>
+<p>具体怎么存入都是由Mongoose和MongoDB自己决定，当然，这个属性你也可以去除</p>
+<p>new Schema({…},{versionKey:false});<br>除非你知道你在做什么，并且你知道这样做的后果</p>
+<h5 id="2-5-6_autoIndex——自动索引">2.5.6 autoIndex——自动索引</h5><p>该内容将在索引章节单独讲解</p>
+<h3 id="3-_Documents">3. Documents</h3><p>Document是与MongoDB文档一一对应的模型，Document可等同于Entity，具有属性和操作性</p>
+<p>注意：</p>
+<p>Document的`CRUD都必须经过严格验证的，参看2.5.2 Schema的strict严格配置</p>
+<h4 id="3-1_查询">3.1 查询</h4><p>查询内容过多，专题讲解</p>
+<h4 id="3-2_更新">3.2 更新</h4><p>有许多方式来更新文件，以下是常用的传统方式：</p>
+<p>PersonModel.findById(id,function(err,person){<br>person.name = ‘MDragon’;<br>person.save(function(err){});<br>});<br>这里，利用Model模型查询到了person对象，该对象属于Entity，可以有save操作，如果使用Model`操作，需注意：</p>
+<p>PersonModel.findById(id,function(err,person){<br>person.name = ‘MDragon’;<br>var _id = person._id; //需要取出主键_id<br>delete person._id;    //再将其删除<br>PersonModel.update({_id:_id},person,function(err){});<br>//此时才能用Model操作，否则报错<br>});<br>update第一个参数是查询条件，第二个参数是更新的对象，但不能更新主键，这就是为什么要删除主键的原因。</p>
+<p>当然这样的更新很麻烦，可以使用$set属性来配置，这样也不用先查询，如果更新的数据比较少，可用性还是很好的：</p>
+<p>PersonModel.update({_id:_id},{$set:{name:’MDragon’}},function(err){});<br>需要注意，Document的CRUD操作都是异步执行，callback第一个参数必须是err，而第二个参数各个方法不一样，update的callback第二个参数是更新的数量，如果要返回更新后的对象，则要使用如下方法</p>
+<p>Person.findByIdAndUpdate(_id,{$set:{name:’MDragon’}},function(err,person){<br>console.log(person.name); //MDragon<br>});<br>类似的方法还有findByIdAndRemove，如同名字，只能根据id查询并作update/remove操作，操作的数据仅一条</p>
+<h4 id="3-3_新增">3.3 新增</h4><p>如果是Entity，使用save方法，如果是Model，使用create方法</p>
+<p>//使用Entity来增加一条数据<br>var krouky = new PersonModel({name:’krouky’});<br>krouky.save(callback);<br>//使用Model来增加一条数据<br>var MDragon = {name:’MDragon’};<br>PersonModel.create(MDragon,callback);<br>两种新增方法区别在于，如果使用Model新增时，传入的对象只能是纯净的JSON对象，不能是由Model创建的实体，原因是：由Model创建的实体krouky虽然打印是只有{name:’krouky’}，但是krouky属于Entity，包含有Schema属性和Model数据库行为模型。如果是使用Model创建的对象，传入时一定会将隐藏属性也存入数据库，虽然3.x追加了默认严格属性，但也不必要增加操作的报错</p>
+<h4 id="3-4_删除">3.4 删除</h4><p>和新增一样，删除也有2种方式，但Entity和Model都使用remove方法</p>
+<h3 id="4-Sub_Docs">4.Sub Docs</h3><p>如同SQL数据库中2张表有主外关系，Mongoose将2个Document的嵌套叫做Sub-Docs（子文档）</p>
+<p>简单的说就是一个Document嵌套另外一个Document或者Documents:</p>
+<p>var ChildSchema1 = new Schema({name:String});<br>var ChildSchema2 = new Schema({name:String});<br>var ParentSchema = new Schema({<br>children1:ChildSchema1,   //嵌套Document<br>children2:[ChildSchema2]  //嵌套Documents<br>});<br>Sub-Docs享受和Documents一样的操作，但是Sub-Docs的操作都由父类去执行</p>
+<p>var ParentModel = db.model(‘Parent’,parentSchema);<br>var parent = new ParentModel({<br>children2:[{name:’c1’},{name:’c2’}]<br>});<br>parent.children2[0].name = ‘d’;<br>parent.save(callback);<br>parent在执行保存时，由于包含children2，他是一个数据库模型对象，因此会先保存chilren2[0]和chilren2[1]。</p>
+<p>如果子文档在更新时出现错误，将直接报在父类文档中，可以这样处理：</p>
+<p>ChildrenSchema.pre(‘save’,function(next){<br>if(‘x’ === this.name) return next(new Error(‘#err:not-x’));<br>next();<br>});<br>var parent = new ParentModel({children1:{name:’not-x’}});<br>parent.save(function(err){<br>console.log(err.message); //#err:not-x<br>});</p>
+<h4 id="4-1_查询子文档">4.1 查询子文档</h4><p>如果children是parent的子文档，可以通过如下方法查询到children</p>
+<p>var child = parent.children.id(id);</p>
+<h4 id="4-2_新增、删除、更新">4.2 新增、删除、更新</h4><p>子文档是父文档的一个属性，因此按照属性的操作即可，不同的是在新增父类的时候，子文档是会被先加入进去的。</p>
+<p>如果ChildrenSchema是临时的一个子文档，不作为数据库映射集合，可以这样：</p>
+<p>var ParentSchema = new Schema({<br>children:{<br>name:String<br>}<br>});<br>//其实就是匿名混合模式</p>
+<h3 id="5-Model">5.Model</h3><h4 id="5-1_什么是Model">5.1 什么是Model</h4><p>Model模型，是经过Schema构造来的，除了Schema定义的数据库骨架以外，还具有数据库行为模型，他相当于管理数据库属性、行为的类</p>
+<h4 id="5-2_如何创建Model">5.2 如何创建Model</h4><p>你必须通过Schema来创建，如下：</p>
+<p>//先创建Schema<br>var TankSchema = new Schema({<br>name:’String’,<br>size:’String’<br>});<br>//通过Schema创建Model<br>var TankModel = mongoose.model(‘Tank’,TankSchema);</p>
+<h4 id="5-2_操作Model">5.2 操作Model</h4><p>该模型就能直接拿来操作，具体查看API，例如：</p>
+<p>var tank = {‘something’,size:’small’};<br>TankModel.create(tank);<br>注意：</p>
+<p>你可以使用Model来创建Entity，Entity实体是一个特有Model具体对象，但是他并不具备Model的方法，只能用自己的方法。</p>
+<p>//通过Model创建Entity<br>var tankEntity = new TankModel(‘someother’,’size:big’);<br>tankEntity.save();</p>
+<h3 id="6-Query">6.Query</h3><p>查询是数据库中运用最多也是最麻烦的地方，这里对Query解读的并不完善，仅仅是自己的一点领悟而已。</p>
+<h4 id="6-1_查询的方式">6.1 查询的方式</h4><p>通常有2种查询方式，一种是直接查询，一种是链式查询（2种查询都是自己命名的）</p>
+<h5 id="6-1-1_直接查询">6.1.1 直接查询</h5><p>在查询时带有回调函数的，称之为直接查询，查询的条件往往通过API来设定，例如：</p>
+<p>PersonModel.findOne({‘name.last’:’dragon’},’some select’,function(err,person){<br>//如果err==null，则person就能取到数据<br>});<br>具体的查询参数，请查询API</p>
+<h5 id="6-1-2_链式查询">6.1.2 链式查询</h5><p>在查询时候，不带回调，而查询条件通过API函数来制定，例如：</p>
+<p>var query = PersonModel.findOne({‘name.last’:’dragon’});<br>query.select(‘some select’);<br>query.exec(function(err,pserson){<br>//如果err==null，则person就能取到数据<br>});<br>这种方式相对直接查询，分的比较明细，如果不带callback，则返回query，query没有执行的预编译查询语句，该query对象执行的方法都将返回自己，只有在执行exec方法时才执行查询，而且必须有回调。</p>
+<p>因为query的操作始终返回自身，我们可以采用更形象的链式写法</p>
+<p>Person<br>.find({ occupation: /host/ })<br>.where(‘name.last’).equals(‘Ghost’)<br>.where(‘age’).gt(17).lt(66)<br>.where(‘likes’).in([‘vaporizing’, ‘talking’])<br>.limit(10)<br>.sort(‘-occupation’)<br>.select(‘name occupation’)<br>.exec(callback);</p>
+<h3 id="7-Validation">7.Validation</h3><p>数据的存储是需要验证的，不是什么数据都能往数据库里丢或者显示到客户端的，数据的验证需要记住以下规则：</p>
+<p>验证始终定义在SchemaType中<br>验证是一个内部中间件<br>验证是在一个Document被保存时默认启用的，除非你关闭验证<br>验证是异步递归的，如果你的SubDoc验证失败，Document也将无法保存<br>验证并不关心错误类型，而通过ValidationError这个对象可以访问</p>
+<h4 id="7-1_验证器">7.1 验证器</h4><p>required 非空验证<br>min/max 范围验证（边值验证）<br>enum/match 枚举验证/匹配验证<br>validate 自定义验证规则<br>以下是综合案例：</p>
+<p>var PersonSchema = new Schema({<br>name:{<br>type:’String’,<br>required:true //姓名非空<br>},<br>age:{<br>type:’Nunmer’,<br>min:18,       //年龄最小18<br>max:120     //年龄最大120<br>},<br>city:{<br>type:’String’,<br>enum:[‘北京’,’上海’]  //只能是北京、上海人<br>},<br>other:{<br>type:’String’,<br>validate:[validator,err]  //validator是一个验证函数，err是验证失败的错误信息<br>}<br>});</p>
+<h4 id="7-2_验证失败">7.2 验证失败</h4><p>如果验证失败，则会返回err信息，err是一个对象该对象属性如下</p>
+<p>err.errors                //错误集合（对象）<br>err.errors.color          //错误属性(Schema的color属性)<br>err.errors.color.message  //错误属性信息<br>err.errors.path             //错误属性路径<br>err.errors.type             //错误类型<br>err.name                //错误名称<br>err.message                 //错误消息<br>一旦验证失败，Model和Entity都将具有和err一样的errors属性</p>
+<h3 id="8-Middleware中间件">8.Middleware中间件</h3><h4 id="8-1_什么是中间件">8.1 什么是中间件</h4><p>中间件是一种控制函数，类似插件，能控制流程中的init、validate、save、remove`方法</p>
+<h4 id="8-2_中间件的分类">8.2 中间件的分类</h4><p>中间件分为两类</p>
+<h5 id="8-2-1_Serial串行">8.2.1 Serial串行</h5><p>串行使用pre方法，执行下一个方法使用next调用</p>
+<p>var schema = new Schema(…);<br>schema.pre(‘save’,function(next){<br>//做点什么<br>next();<br>});</p>
+<h5 id="8-2-2_Parallel并行">8.2.2 Parallel并行</h5><p>并行提供更细粒度的操作</p>
+<p>var schema = new Schema(…);<br>schema.pre(‘save’,function(next,done){<br>//下一个要执行的中间件并行执行<br>next();<br>doAsync(done);<br>});</p>
+<h4 id="8-3_中间件特点">8.3 中间件特点</h4><p>一旦定义了中间件，就会在全部中间件执行完后执行其他操作，使用中间件可以雾化模型，避免异步操作的层层迭代嵌套</p>
+<h4 id="8-4_使用范畴">8.4 使用范畴</h4><p>复杂的验证<br>删除有主外关联的doc<br>异步默认<br>某个特定动作触发异步任务，例如触发自定义事件和通知<br>例如，可以用来做自定义错误处理</p>
+<p>schema.pre(‘save’,function(next){<br>var err = new Eerror(‘some err’);<br>next(err);<br>});<br>entity.save(function(err){<br>console.log(err.message); //some err<br>});</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://huangshiyang.com/2015/06/18/Mongoose学习参考文档/" data-title="Mongoose学习参考文档 | Huang Shiyang" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/05/01/diagrams/"  title="diagram">
+ <strong>下一篇：</strong><br/> 
+ <span>diagram
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mongoose学习参考文档"><span class="toc-number">1.</span> <span class="toc-text">Mongoose学习参考文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、快速通道"><span class="toc-number">1.1.</span> <span class="toc-text">一、快速通道</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1_名词解释"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 名词解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2_准备工作"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、新手指引"><span class="toc-number">1.3.</span> <span class="toc-text">二、新手指引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_Schema——纯洁的数据库原型"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Schema——纯洁的数据库原型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1_什么是Schema"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1.1 什么是Schema</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2_如何定义Schema"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">1.2 如何定义Schema</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3_什么是Schema-Type"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">1.3 什么是Schema.Type</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4_Schema-Types"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">1.4 Schema.Types</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5_关于Buffer"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">1.5 关于Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6_关于Mixed"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">1.6 关于Mixed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7_关于ObjectId"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">1.7 关于ObjectId</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-8_关于Array"><span class="toc-number">1.3.1.8.</span> <span class="toc-text">1.8 关于Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-9_附言"><span class="toc-number">1.3.1.9.</span> <span class="toc-text">1.9 附言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_Schema的扩展"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Schema的扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_实例方法"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">2.1 实例方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_静态方法"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">2.2 静态方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_索引"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">2.3 索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4_虚拟属性"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">2.4 虚拟属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5_配置项"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">2.5 配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-1_safe——安全属性（默认安全）"><span class="toc-number">1.3.2.5.1.</span> <span class="toc-text">2.5.1 safe——安全属性（默认安全）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-2_strict——严格配置（默认启用）"><span class="toc-number">1.3.2.5.2.</span> <span class="toc-text">2.5.2 strict——严格配置（默认启用）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-3_shardKey"><span class="toc-number">1.3.2.5.3.</span> <span class="toc-text">2.5.3 shardKey</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-4_capped——上限设置"><span class="toc-number">1.3.2.5.4.</span> <span class="toc-text">2.5.4 capped——上限设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-5_versionKey——版本锁"><span class="toc-number">1.3.2.5.5.</span> <span class="toc-text">2.5.5 versionKey——版本锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-6_autoIndex——自动索引"><span class="toc-number">1.3.2.5.6.</span> <span class="toc-text">2.5.6 autoIndex——自动索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_Documents"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Documents</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1_查询"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">3.1 查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2_更新"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">3.2 更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3_新增"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">3.3 新增</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4_删除"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">3.4 删除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Sub_Docs"><span class="toc-number">1.3.4.</span> <span class="toc-text">4.Sub Docs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1_查询子文档"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">4.1 查询子文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2_新增、删除、更新"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">4.2 新增、删除、更新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Model"><span class="toc-number">1.3.5.</span> <span class="toc-text">5.Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1_什么是Model"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">5.1 什么是Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2_如何创建Model"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">5.2 如何创建Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2_操作Model"><span class="toc-number">1.3.5.3.</span> <span class="toc-text">5.2 操作Model</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Query"><span class="toc-number">1.3.6.</span> <span class="toc-text">6.Query</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1_查询的方式"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">6.1 查询的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-1_直接查询"><span class="toc-number">1.3.6.1.1.</span> <span class="toc-text">6.1.1 直接查询</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-2_链式查询"><span class="toc-number">1.3.6.1.2.</span> <span class="toc-text">6.1.2 链式查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Validation"><span class="toc-number">1.3.7.</span> <span class="toc-text">7.Validation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1_验证器"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">7.1 验证器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2_验证失败"><span class="toc-number">1.3.7.2.</span> <span class="toc-text">7.2 验证失败</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Middleware中间件"><span class="toc-number">1.3.8.</span> <span class="toc-text">8.Middleware中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1_什么是中间件"><span class="toc-number">1.3.8.1.</span> <span class="toc-text">8.1 什么是中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2_中间件的分类"><span class="toc-number">1.3.8.2.</span> <span class="toc-text">8.2 中间件的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#8-2-1_Serial串行"><span class="toc-number">1.3.8.2.1.</span> <span class="toc-text">8.2.1 Serial串行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-2-2_Parallel并行"><span class="toc-number">1.3.8.2.2.</span> <span class="toc-text">8.2.2 Parallel并行</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3_中间件特点"><span class="toc-number">1.3.8.3.</span> <span class="toc-text">8.3 中间件特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-4_使用范畴"><span class="toc-number">1.3.8.4.</span> <span class="toc-text">8.4 使用范畴</span></a></li></ol></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sercle-net/" title="sercle.net">sercle.net<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/diagram/" title="diagram">diagram<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sercle/" title="sercle">sercle<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Mongodb/" title="Mongodb">Mongodb<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huangshiyang.com" target="_blank" title="Huang Shiyang">Huang Shiyang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wp.huangshiyang.com" target="_blank" title="WordPress">WordPress</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://github.com/ShiyangHuang" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/#" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Huang Shiyang">Huang Shiyang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'huangshiyang';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
