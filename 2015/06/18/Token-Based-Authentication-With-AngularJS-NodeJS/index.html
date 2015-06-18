@@ -1,0 +1,545 @@
+
+ <!DOCTYPE HTML>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Token-Based Authentication With AngularJS &amp; NodeJS | Huang Shiyang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Huang Shiyang">
+    
+
+    
+    <meta name="description" content="Final product imageWhat You’ll Be CreatingAuthentication is one of the most important parts of any web application. In this tutorial, we’ll be discussing token-based authentication systems and how the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Token-Based Authentication With AngularJS & NodeJS">
+<meta property="og:url" content="https://huangshiyang.com/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/index.html">
+<meta property="og:site_name" content="Huang Shiyang">
+<meta property="og:description" content="Final product imageWhat You’ll Be CreatingAuthentication is one of the most important parts of any web application. In this tutorial, we’ll be discussing token-based authentication systems and how the">
+<meta property="og:image" content="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/1.png">
+<meta property="og:image" content="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/2.png">
+<meta property="og:image" content="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/3.png">
+<meta property="og:image" content="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/4.png">
+<meta property="og:image" content="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/5.png">
+<meta property="og:image" content="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/6.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Token-Based Authentication With AngularJS & NodeJS">
+<meta name="twitter:description" content="Final product imageWhat You’ll Be CreatingAuthentication is one of the most important parts of any web application. In this tutorial, we’ll be discussing token-based authentication systems and how the">
+
+    
+    <link rel="alternative" href="/#" title="Huang Shiyang" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="https://huangshiyang.com"><img src="/img/nav-logo.gif" alt="Huang Shiyang" title="Huang Shiyang"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Huang Shiyang">Huang Shiyang</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:huangshiyang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/" title="Token-Based Authentication With AngularJS &amp; NodeJS" itemprop="url">Token-Based Authentication With AngularJS &amp; NodeJS</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Huang Shiyang" target="_blank" itemprop="author">null</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-18T17:36:01.000Z" itemprop="datePublished"> Published 2015-06-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Traditional_Authentication_Systems"><span class="toc-number">1.</span> <span class="toc-text">Traditional Authentication Systems</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token-Based_Authentication"><span class="toc-number">2.</span> <span class="toc-text">Token-Based Authentication</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JWT"><span class="toc-number">3.</span> <span class="toc-text">JWT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A_Practical_Example"><span class="toc-number">4.</span> <span class="toc-text">A Practical Example</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Advantages"><span class="toc-number">5.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#An_Example_Application"><span class="toc-number">6.</span> <span class="toc-text">An Example Application</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Heroku_Deployment"><span class="toc-number">6.1.</span> <span class="toc-text">Heroku Deployment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#token-based-auth-frontend"><span class="toc-number">6.2.</span> <span class="toc-text">token-based-auth-frontend</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+		
+		</div>
+		
+		<img src="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/1.png">
+<p>Final product image<br>What You’ll Be Creating<br>Authentication is one of the most important parts of any web application. In this tutorial, we’ll be discussing token-based authentication systems and how they differ from traditional login systems. At the end of this tutorial, you’ll see a fully working demo written in AngularJS and NodeJS</p>
+<h1 id="Traditional_Authentication_Systems">Traditional Authentication Systems</h1><p>Before proceeding with a token-based authentication system, let’s have a look at a traditional authentication system first.</p>
+<ul>
+<li>The user provides a username and password in the login form and clicks Log In.</li>
+<li>After the request is made, validate the user on the backend by querying in the database. If the request is valid, create a session by using the user information fetched from the database, and then return the session information in the response header in order to store the session ID in the browser.<br>Provide the session information for accessing restricted endpoints in the application.</li>
+<li><p>If the session information is valid, let the user access specified end points, and respond with the rendered HTML content.</p>
+<img src="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/2.png">
+<p>Everything is fine until this point. The web application works well, and it is able to authenticate users so that they may access restricted endpoints; however, what happens when you want to develop another client, say for Android, for your application? Will you be able to use the current application to authenticate mobile clients and to serve restricted content? As it currently stands, no. There are two main reasons for this:</p>
+</li>
+<li><p>Sessions and cookies do not make sense for mobile applications. You cannot share sessions or cookies created on the server-side with mobile clients.</p>
+</li>
+<li>In the current application, the rendered HTML is returned. In a mobile client, you need something like JSON or XML to be included as the response.<br>In this case, you need a client-independent application.</li>
+</ul>
+<h1 id="Token-Based_Authentication">Token-Based Authentication</h1><p>In token-based authentication, cookies and sessions will not be used. A token will be used for authenticating a user for each request to the server. Let’s redesign the first scenario with token-based authentication.</p>
+<p>It will use the following flow of control:</p>
+<ul>
+<li>The user provides a username and password in the login form and clicks Log In.<br>After a request is made, validate the user on the backend by querying in the database. If the request is valid, create a token by using the user information fetched from the database, and then return that information in the response header so that we can store the token browser in local storage.</li>
+<li>Provide token information in every request header for accessing restricted endpoints in the application.</li>
+<li>If the token fetched from the request header information is valid, let the user access the specified end point, and respond with JSON or XML.</li>
+<li>In this case, we have no returned session or cookie, and we have not returned any HTML content. That means that we can use this architecture for any client for a specific application. You can see the architecture schema below:</li>
+</ul>
+<img src="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/3.png">
+<p>So, what is this JWT?</p>
+<h1 id="JWT">JWT</h1><p>JWT stands for JSON Web Token and is a token format used in authorization headers. This token helps you to design communication between two systems in a secure way. Let’s rephrase JWT as the “bearer token” for the purposes of this tutorial. A bearer token consists of three parts: header, payload, and signature.</p>
+<p>The header is the part of the token that keeps the token type and encryption method, which is also encrypted with base-64.<br>The payload includes the information. You can put any kind of data like user info, product info and so on, all of which is stored with base-64 encryption.<br>The signature consists of combinations of the header, payload, and secret key. The secret key must be kept securely on the server-side.<br>You can see the JWT schema and an example token below;</p>
+<img src="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/4.png">
+<p>You do not need to implement the bearer token generator as you can find versions that already exist in several languages. You can see some of them below:</p>
+<p>Language    Library URL<br>NodeJS        <a href="http://github.com/auth0/node-jsonwebtoken" target="_blank" rel="external">http://github.com/auth0/node-jsonwebtoken</a><br>PHP            <a href="http://github.com/firebase/php-jwt" target="_blank" rel="external">http://github.com/firebase/php-jwt</a><br>Java        <a href="http://github.com/auth0/java-jwt" target="_blank" rel="external">http://github.com/auth0/java-jwt</a><br>Ruby        <a href="http://github.com/progrium/ruby-jwt" target="_blank" rel="external">http://github.com/progrium/ruby-jwt</a><br>.NET        <a href="http://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet" target="_blank" rel="external">http://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet</a><br>Python        <a href="http://github.com/progrium/pyjwt/" target="_blank" rel="external">http://github.com/progrium/pyjwt/</a></p>
+<h1 id="A_Practical_Example">A Practical Example</h1><p>After covering some basic information about token-based authentication, we can now proceed with a practical example. Take a look at the following schema, after which we’ll analyze it in more detail:</p>
+<img src="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/5.png">
+<ul>
+<li>The requests are made by several clients such as a web application, a mobile client, etc., to the API for a specific purpose.</li>
+<li>The requests are made to a service like <a href="https://api.yourexampleapp.com" target="_blank" rel="external">https://api.yourexampleapp.com</a>. If lots of people use the application, multiple servers may be required to serve the requested operation.</li>
+<li>Here, the load balancer is used for balancing requests to best suit the application servers at the back-end. When you make a request to <a href="https://api.yourexampleapp.com" target="_blank" rel="external">https://api.yourexampleapp.com</a>, first the load balancer will handle a request, and then it will redirect the client to a specific server.</li>
+<li><p>There is one application, and this application is deployed to several servers (server-1, server-2, …, server-n). Whenever a request is made to <a href="https://api.yourexampleapp.com" target="_blank" rel="external">https://api.yourexampleapp.com</a>, the back-end application will intercept the request header and extract token information from the authorization header. A database query will be made by using this token. If this token is valid and has the required permission to access the requested endpoint, it will continue. If not, it will return a 403 response code (which indicates a forbidden status).</p>
+<h1 id="Advantages">Advantages</h1><p>Token-based authentication comes with several advantages that solve serious problems. Some of them are as follows:</p>
+</li>
+<li><p>Client Independent Services. In token-based authentication, a token is transferred via request headers, instead of keeping the authentication information in sessions or cookies. This means there is no state. You can send a request to the server from any type of client that can make HTTP requests.</p>
+</li>
+<li>CDN. In most current web applications, views are rendered on the back-end and HTML content is returned to the browser. Front-end logic depends on back-end code. There is no need to make such a dependency. This comes with several problems. For example, if you are working with a design agency that implements your front-end HTML, CSS, and JavaScript, you need to take that front-end code and migrate it into your back-end code in order to do some rendering or populating operations. After some time, your rendered HTML content will differ greatly from what the code agency implemented. In token-based authentication, you can develop a front-end project separately from the back-end code. Your back-end code will return a JSON response instead of rendered HTML, and you can put the minified, gzipped version of the front-end code into the CDN. When you go to your web page, HTML content will be served from the CDN, and page content will be populated by API services using the token in the authorization headers</li>
+<li>No Cookie-Session (or No CSRF). CSRF is a major problem in modern web security because it doesn’t check whether a request source is trusted or not. To solve this problem, a token pool is used for sending that token on every form post. In token-based authentication, a token is used in authorization headers, and CSRF does not include that information.</li>
+<li>Persistent Token Store. When a session read, write, or delete operation is made in the application, it will make a file operation in the operating system’s temp folder, at least for the first time. Let’s say that you have multiple servers and a session is created on the first server. When you make another request and your request drops in another server, session information will not exist and will get an “unauthorized” response. I know, you can solve that with a sticky session. However, in token-based authentication, this case is solved naturally. There is no sticky session problem, because the request token is intercepted on every request on any server.<br>Those are the most common advantages of token-based authentication and communication. That’s the end of the theoretical and architectural talk about token-based authentication. Time for a practical example.</li>
+</ul>
+<h1 id="An_Example_Application">An Example Application</h1><p>You will see two applications to demonstrate token-based authentication:</p>
+<ol>
+<li>token-based-auth-backend</li>
+<li>token-based-auth-frontend<br>In the back-end project, there will be service implementations, and service results will be in JSON format. There is no view returned in services. In the front-end project, there will be an AngularJS project for front-end HTML and then the front-end app will be populated by AngularJS services to make requests to the back-end services.</li>
+</ol>
+<p>token-based-auth-backend<br>In the back-end project, there are three main files:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">package<span class="class">.json</span> is <span class="keyword">for</span> dependency management.</span><br><span class="line">models\User<span class="class">.js</span> contains <span class="tag">a</span> User model that will be used <span class="keyword">for</span> making database operations about users.</span><br><span class="line">server<span class="class">.js</span> is <span class="keyword">for</span> project bootstrapping and request handling.</span><br></pre></td></tr></table></figure>
+<p>That’s it! This project is very simple, so that you can understand the main concept easily without doing a deep dive.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">name</span>": <span class="value"><span class="string">"angular-restful-auth"</span></span>,</span><br><span class="line">    "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.1"</span></span>,</span><br><span class="line">    "<span class="attribute">dependencies</span>": <span class="value">&#123;</span><br><span class="line">        "<span class="attribute">express</span>": <span class="value"><span class="string">"4.x"</span></span>,</span><br><span class="line">        "<span class="attribute">body-parser</span>": <span class="value"><span class="string">"~1.0.0"</span></span>,</span><br><span class="line">        "<span class="attribute">morgan</span>": <span class="value"><span class="string">"latest"</span></span>,</span><br><span class="line">        "<span class="attribute">mongoose</span>": <span class="value"><span class="string">"3.8.8"</span></span>,</span><br><span class="line">        "<span class="attribute">jsonwebtoken</span>": <span class="value"><span class="string">"0.4.0"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">engines</span>": <span class="value">&#123;</span><br><span class="line">        "<span class="attribute">node</span>": <span class="value"><span class="string">"&gt;=0.10.0"</span></span><br><span class="line">    </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>package.json contains dependencies for the project: express for MVC, body-parser for simulating post request handling in NodeJS, morgan for request logging, mongoose for our ORM framework to connect to MongoDB, and jsonwebtoken for creating JWT tokens by using our User model. There is also an attribute called engines that says that this project is made by using NodeJS version &gt;= 0.10.0. This is useful for PaaS services like Heroku. We will also cover that topic in another section.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose     = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> Schema       = mongoose.Scema;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> UserSchema   = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    email: <span class="built_in">String</span>,</span><br><span class="line">    password: <span class="built_in">String</span>,</span><br><span class="line">    token: <span class="built_in">String</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>module.exports = mongoose.model(‘User’, UserSchema);<br>We said that we would generate a token by using the user model payload. This model helps us to make user operations on MongoDB. In User.js, the user-schema is defined and the User model is created by using a mongoose model. This model is ready for database operations.</p>
+<p>Our dependencies are defined, and our user model is defined, so now let’s combine all those to construct a service for handling specific requests.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Required Modules</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> express</span>    = require(<span class="string">"express"</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> morgan</span>     = require(<span class="string">"morgan"</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> bodyParser</span> = require(<span class="string">"body-parser"</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> jwt</span>        = require(<span class="string">"jsonwebtoken"</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> mongoose</span>   = require(<span class="string">"mongoose"</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> app</span>        = express();</span><br></pre></td></tr></table></figure>
+<p>In NodeJS, you can include a module in your project by using require. First, we need to import the necessary modules into the project:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> port = process.env.PORT || <span class="number">3001</span>;</span><br><span class="line"><span class="keyword">var</span> User     = <span class="built_in">require</span>(<span class="string">'./models/User'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Connect to DB</span></span><br><span class="line">mongoose.connect(process.env.MONGO_URL);</span><br></pre></td></tr></table></figure>
+<p>Our service will serve through a specific port. If any port variable is defined in the system environment variables, you can use that, or we have defined port 3001. After that, the User model is included, and the database connection is established in order to do some user operations. Do not forget to define an environment variable—MONGO_URL—for the<br>8database connection URL.</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="keyword">use</span>(bodyParser.urlencoded(&#123; extended: <span class="literal">true</span> &#125;));</span><br><span class="line">app.<span class="keyword">use</span>(bodyParser.json());</span><br><span class="line">app.<span class="keyword">use</span>(morgan(<span class="string">"dev"</span>));</span><br><span class="line">app.<span class="keyword">use</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span> </span>&#123;</span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Methods'</span>, <span class="string">'GET, POST'</span>);</span><br><span class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Headers'</span>, <span class="string">'X-Requested-With,content-type, Authorization'</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>In the above section, we’ve made some configurations for simulating an HTTP request handling in NodeJS by using Express. We are` allowing requests to come from different domains in order to develop a client-independent system. If you do not allow this, you will trigger a CORS (Cross Origin Request Sharing) error in the web browser.</p>
+<p>Access-Control-Allow-Origin allowed for all domains.<br>You can send POST and GET requests to this service.<br>X-Requested-With and content-type headers are allowed.</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">app</span><span class="class">.post</span>(<span class="string">'/authenticate'</span>, <span class="function">function</span>(req, res) &#123;</span><br><span class="line">    <span class="tag">User</span><span class="class">.findOne</span>(&#123;<span class="tag">email</span>: <span class="tag">req</span><span class="class">.body</span><span class="class">.email</span>, <span class="tag">password</span>: <span class="tag">req</span><span class="class">.body</span><span class="class">.password</span>&#125;, <span class="tag">function</span>(err, user) &#123;</span><br><span class="line">        <span class="tag">if</span> (err) &#123;</span><br><span class="line">            <span class="tag">res</span><span class="class">.json</span>(&#123;</span><br><span class="line">                <span class="attribute">type</span>: false,</span><br><span class="line">                <span class="attribute">data</span>: <span class="string">"Error occured: "</span> + err</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="tag">else</span> &#123;</span><br><span class="line">            <span class="tag">if</span> (user) &#123;</span><br><span class="line">               <span class="tag">res</span><span class="class">.json</span>(&#123;</span><br><span class="line">                    <span class="attribute">type</span>: true,</span><br><span class="line">                    <span class="attribute">data</span>: user,</span><br><span class="line">                    <span class="attribute">token</span>: user.token</span><br><span class="line">                &#125;); </span><br><span class="line">            &#125; <span class="tag">else</span> &#123;</span><br><span class="line">                <span class="tag">res</span><span class="class">.json</span>(&#123;</span><br><span class="line">                    <span class="attribute">type</span>: false,</span><br><span class="line">                    <span class="attribute">data</span>: <span class="string">"Incorrect email/password"</span></span><br><span class="line">                &#125;);    </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>We have imported all of the required modules and defined our configuration, so now it’s time to define request handlers. In the above code, whenever you make a POST request to /authenticate with username and password, you will get a JWT token. First, the database query is processed by using a username and password. If a user exists, the user data will be returned with its token. But, what if there is no such user matching the username and/or password?</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/signin'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span> &#123;</span><br><span class="line">    User.findOne(&#123;email: req.body.email, password: req.body.password&#125;, <span class="function"><span class="keyword">function</span><span class="params">(err, user)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            res.json(&#123;</span><br><span class="line">                <span class="keyword">type</span>: false,</span><br><span class="line">                <span class="type">data</span>: <span class="string">"Error occured: "</span> + err</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (user) &#123;</span><br><span class="line">                res.json(&#123;</span><br><span class="line">                    <span class="keyword">type</span>: false,</span><br><span class="line">                    <span class="type">data</span>: <span class="string">"User already exists!"</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                var userModel = new User();</span><br><span class="line">                userModel.email = req.body.email;</span><br><span class="line">                userModel.password = req.body.password;</span><br><span class="line">                userModel.<span class="keyword">save</span>(<span class="function"><span class="keyword">function</span><span class="params">(err, user)</span></span> &#123;</span><br><span class="line">                    user.token = jwt.<span class="built_in">sign</span>(user, process.env.JWT_SECRET);</span><br><span class="line">                    user.<span class="keyword">save</span>(<span class="function"><span class="keyword">function</span><span class="params">(err, user1)</span></span> &#123;</span><br><span class="line">                        res.json(&#123;</span><br><span class="line">                            <span class="keyword">type</span>: true,</span><br><span class="line">                            <span class="type">data</span>: user1,</span><br><span class="line">                            token: user1.token</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>When you make a POST request to /signin with username and password, a new user will be created by using posted user information. On the 19th line, you can see that a new JSON token is generated by using the jsonwebtoken module, which has been assigned to the jwt variable. The authentication part is OK. What if we try to access a restricted endpoint? How can we manage to access that endpoint?</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">app</span><span class="class">.get</span>(<span class="string">'/me'</span>, ensureAuthorized, <span class="function">function</span>(req, res) &#123;</span><br><span class="line">    <span class="tag">User</span><span class="class">.findOne</span>(&#123;<span class="tag">token</span>: <span class="tag">req</span><span class="class">.token</span>&#125;, <span class="tag">function</span>(err, user) &#123;</span><br><span class="line">        <span class="tag">if</span> (err) &#123;</span><br><span class="line">            <span class="tag">res</span><span class="class">.json</span>(&#123;</span><br><span class="line">                <span class="attribute">type</span>: false,</span><br><span class="line">                <span class="attribute">data</span>: <span class="string">"Error occured: "</span> + err</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; <span class="tag">else</span> &#123;</span><br><span class="line">            <span class="tag">res</span><span class="class">.json</span>(&#123;</span><br><span class="line">                <span class="attribute">type</span>: true,</span><br><span class="line">                <span class="attribute">data</span>: user</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>When you make a GET request to /me, you will get the current user info, but in order to continue with the requested endpoint, the ensureAuthorized function will be executed.</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ensureAuthorized</span><span class="params">(req, res, next)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bearerToken;</span><br><span class="line">    <span class="keyword">var</span> bearerHeader = req.headers[<span class="string">"authorization"</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> bearerHeader !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> bearer = bearerHeader.split(<span class="string">" "</span>);</span><br><span class="line">        bearerToken = bearer[<span class="number">1</span>];</span><br><span class="line">        req.token = bearerToken;</span><br><span class="line">        next();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.send(<span class="number">403</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In this function, request headers are intercepted and the authorization header is extracted. If a bearer token exists in this header, that token is assigned to req.token in order to be used throughout the request, and the request can be continued by using next(). If a token does not exist, you will get a 403 (Forbidden) response. Let’s go back to the handler /me, and use req.token to fetch user data with this token. Whenever you create a new user, a token is generated and saved in the user model in DB. Those tokens are unique.</p>
+<p>We have only three handlers for this simple project. After that, you will see;</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.<span class="keyword">on</span>(<span class="string">'uncaughtException'</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> <span class="comment">&#123;</span><br><span class="line">    console.log(err);</span><br><span class="line">&#125;</span>);</span></span><br></pre></td></tr></table></figure>
+<p>The NodeJS app may crash if an error occurs. With the above code, that crash is prevented and an error log is printed in the console. And finally, we can start the server by using the following code snippet. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Start Server</span></span><br><span class="line">app.listen(port, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">"Express server listening on port "</span> + port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>To sum up:</p>
+<p>Modules are imported.<br>Configurations are made.<br>Request handlers are defined.<br>A middleware is defined in order to intercept restricted endpoints.<br>The server is started.<br>We are done with the back-end service. So that it can be used by multiple clients, you can deploy this simple server application to your servers, or maybe you can deploy in Heroku. There is a file called Procfile in the project’s root folder. Let’s deploy our service in Heroku.</p>
+<h2 id="Heroku_Deployment">Heroku Deployment</h2><p>You can clone the back-end project from this GitHub repository.</p>
+<p>I will not be discussing how to create an app in Heroku; you can refer to this article for creating a Heroku app if you have not done this before. After you create your Heroku app, you can add a destination to your current project by using the following command:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add heroku <span class="tag">&lt;<span class="title">your_heroku_git_url</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Now you have cloned a project and added a destination. After git add and git commit, you can push your code to Heroku by performing git push heroku master. When you successfully push a project, Heroku will perform the npm install command to download dependencies into the temp folder on Heroku. After that, it will start your application and you can access your service by using the HTTP protocol.</p>
+<p>Advertisement</p>
+<h2 id="token-based-auth-frontend">token-based-auth-frontend</h2><p>In the front-end project, you will see an AngularJS project. Here, I’ll only mention the main sections in the front-end project, because AngularJS is not something that can be covered within a single tutorial.</p>
+<p>You can clone the project from this GitHub repository. In this project, you will see the following folder structure:<br><img src="/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/6.png"><br>Folder Structure<br>ngStorage.js is a library for AngularJS to manipulate local storage operations. Also, there is a main layout index.html and partials that extend the main layout under the partials folder. controllers.js is for defining our controller actions in the front-end. services.js is for making service requests to our service that I mentioned in the previous project. We have a bootstrap-like file called app.js and in this file, configurations and module imports are applied. Finally, client.js is for serving static HTML files (or just index.html, in this case); this helps us to serve static HTML files when you deploy to a server without using Apache or any other web servers.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/lib/ngStorage.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/lib/loading-bar.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/app.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/controllers.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/services.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>In the main layout HTML file, all of the required JavaScript files are included for AngularJS-related libraries, as well as our custom controller, service, and app file.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* Controllers */</span></span><br><span class="line"> </span><br><span class="line">angular.module(<span class="string">'angularRestfulAuth'</span>)</span><br><span class="line">    .controller(<span class="string">'HomeCtrl'</span>, [<span class="string">'$rootScope'</span>, <span class="string">'$scope'</span>, <span class="string">'$location'</span>, <span class="string">'$localStorage'</span>, <span class="string">'Main'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$rootScope</span>, <span class="variable">$scope</span>, <span class="variable">$location</span>, <span class="variable">$localStorage</span>, Main)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        <span class="variable">$scope</span>.signin = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> formData = &#123;</span><br><span class="line">                email: <span class="variable">$scope</span>.email,</span><br><span class="line">                password: <span class="variable">$scope</span>.password</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            Main.signin(formData, <span class="function"><span class="keyword">function</span><span class="params">(res)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (res.type == <span class="keyword">false</span>) &#123;</span><br><span class="line">                    alert(res.data)    </span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable">$localStorage</span>.token = res.data.token;</span><br><span class="line">                    window.location = <span class="string">"/"</span>;    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="variable">$rootScope</span>.error = <span class="string">'Failed to signin'</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;;</span><br><span class="line"> </span><br><span class="line">        <span class="variable">$scope</span>.signup = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> formData = &#123;</span><br><span class="line">                email: <span class="variable">$scope</span>.email,</span><br><span class="line">                password: <span class="variable">$scope</span>.password</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            Main.save(formData, <span class="function"><span class="keyword">function</span><span class="params">(res)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (res.type == <span class="keyword">false</span>) &#123;</span><br><span class="line">                    alert(res.data)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable">$localStorage</span>.token = res.data.token;</span><br><span class="line">                    window.location = <span class="string">"/"</span>   </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="variable">$rootScope</span>.error = <span class="string">'Failed to signup'</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;;</span><br><span class="line"> </span><br><span class="line">        <span class="variable">$scope</span>.me = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Main.me(<span class="function"><span class="keyword">function</span><span class="params">(res)</span> </span>&#123;</span><br><span class="line">                <span class="variable">$scope</span>.myDetails = res;</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="variable">$rootScope</span>.error = <span class="string">'Failed to fetch details'</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;;</span><br><span class="line"> </span><br><span class="line">        <span class="variable">$scope</span>.logout = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Main.logout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                window.location = <span class="string">"/"</span></span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                alert(<span class="string">"Failed to logout!"</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="variable">$scope</span>.token = <span class="variable">$localStorage</span>.token;</span><br><span class="line">    &#125;])</span><br></pre></td></tr></table></figure>
+<p>In the above code, the HomeCtrl controller is defined and some required modules are injected like $rootScope and $scope. Dependency injection is one of the strongest properties of AngularJS. $scope is the bridge variable between controllers and views in AngularJS that means you can use test in view if you defined it in a specified controller like $scope.test=…. </p>
+<p>In this controller, some utility functions are defined, such as:</p>
+<ul>
+<li>signin to set up a sign-in button on the sign-in form</li>
+<li>signup for sign-up form handling</li>
+<li>me for assigning the Me button in the layout<br>In the main layout, in the main menu list, you can see the data-ng-controller attribute with a value HomeCtrl. That means that this menu dom element can share scope with HomeCtrl. When you click the sign-up button in the form, the sign-up function in the controller file will be executed, and in this function, the sign-up service is used from the Main service that is already injected in this controller. </li>
+</ul>
+<p>The main structure is view -&gt; controller -&gt; service. This service makes simple Ajax requests to the back-end in order to get specific data.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"> </span><br><span class="line">angular.module(<span class="string">'angularRestfulAuth'</span>)</span><br><span class="line">    .factory(<span class="string">'Main'</span>, [<span class="string">'$http'</span>, <span class="string">'$localStorage'</span>, <span class="function"><span class="keyword">function</span><span class="params">($http, $localStorage)</span></span>&#123;</span><br><span class="line">        <span class="keyword">var</span> baseUrl = <span class="string">"your_service_url"</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">changeUser</span><span class="params">(user)</span> </span>&#123;</span><br><span class="line">            angular.extend(currentUser, user);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">urlBase64Decode</span><span class="params">(str)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> output = str.replace(<span class="string">'-'</span>, <span class="string">'+'</span>).replace(<span class="string">'_'</span>, <span class="string">'/'</span>);</span><br><span class="line">            <span class="keyword">switch</span> (output.length % <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                    output += <span class="string">'=='</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                    output += <span class="string">'='</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">throw</span> <span class="string">'Illegal base64url string!'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">window</span>.atob(output);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getUserFromToken</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> token = $localStorage.token;</span><br><span class="line">            <span class="keyword">var</span> user = &#123;&#125;;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> token !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> encoded = token.split(<span class="string">'.'</span>)[<span class="number">1</span>];</span><br><span class="line">                user = <span class="built_in">JSON</span>.parse(urlBase64Decode(encoded));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">var</span> currentUser = getUserFromToken();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            save: <span class="function"><span class="keyword">function</span><span class="params">(data, success, error)</span> </span>&#123;</span><br><span class="line">                $http.post(baseUrl + <span class="string">'/signin'</span>, data).success(success).error(error)</span><br><span class="line">            &#125;,</span><br><span class="line">            signin: <span class="function"><span class="keyword">function</span><span class="params">(data, success, error)</span> </span>&#123;</span><br><span class="line">                $http.post(baseUrl + <span class="string">'/authenticate'</span>, data).success(success).error(error)</span><br><span class="line">            &#125;,</span><br><span class="line">            me: <span class="function"><span class="keyword">function</span><span class="params">(success, error)</span> </span>&#123;</span><br><span class="line">                $http.get(baseUrl + <span class="string">'/me'</span>).success(success).error(error)</span><br><span class="line">            &#125;,</span><br><span class="line">            logout: <span class="function"><span class="keyword">function</span><span class="params">(success)</span> </span>&#123;</span><br><span class="line">                changeUser(&#123;&#125;);</span><br><span class="line">                <span class="keyword">delete</span> $localStorage.token;</span><br><span class="line">                success();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+<p>In the above code, you can see service functions like making requests for authenticating. In controller.js, you may have already realised that there are functions like Main.me. This Main service has been injected in the controller, and in the controller, the services belonging to this service are called directly. </p>
+<p>These functions are simply Ajax requests to our service which we deployed together. Do not forget to put the service URL in baseUrl in the above code. When you deploy your service to Heroku, you will get a service URL like appname.herokuapp.com. In the above code, you will set var baseUrl = “appname.herokuapp.com”. </p>
+<p>In the sign-up or sign-in part of the application, the bearer token responds to the request and this token is saved to local storage. Whenever you make a request to a service in the back-end, you need to put this token in the headers. You can do this by using AngularJS interceptors.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$httpProvider</span>.interceptors.push([<span class="string">'$q'</span>, <span class="string">'$location'</span>, <span class="string">'$localStorage'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$q</span>, <span class="variable">$location</span>, <span class="variable">$localStorage</span>)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="string">'request'</span>: <span class="function"><span class="keyword">function</span> <span class="params">(config)</span> </span>&#123;</span><br><span class="line">                    config.headers = config.headers || &#123;&#125;;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="variable">$localStorage</span>.token) &#123;</span><br><span class="line">                        config.headers.Authorization = <span class="string">'Bearer '</span> + <span class="variable">$localStorage</span>.token;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> config;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="string">'responseError'</span>: <span class="function"><span class="keyword">function</span><span class="params">(response)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(response.status === <span class="number">401</span> || response.status === <span class="number">403</span>) &#123;</span><br><span class="line">                        <span class="variable">$location</span>.path(<span class="string">'/signin'</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> <span class="variable">$q</span>.reject(response);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;]);</span><br></pre></td></tr></table></figure>
+<p>In the above code, every request is intercepted and an authorization header and value are put in the headers.</p>
+<p>In the front-end project, we have some partial pages like signin, signup, profile details, and vb. These partial pages are related with specific controllers. You can see that relation in app.js:</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">angular.<span class="keyword">module</span>(<span class="string">'angularRestfulAuth'</span>, [</span><br><span class="line">    <span class="string">'ngStorage'</span>,</span><br><span class="line">    <span class="string">'ngRoute'</span></span><br><span class="line">])</span><br><span class="line">.config([<span class="string">'$routeProvider'</span>, <span class="string">'$httpProvider'</span>, function (<span class="variable">$routeProvider</span>, <span class="variable">$httpProvider</span>) &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="variable">$routeProvider</span>.</span><br><span class="line">        <span class="keyword">when</span>(<span class="string">'/'</span>, &#123;</span><br><span class="line">            <span class="symbol">templateUrl:</span> <span class="string">'partials/home.html'</span>,</span><br><span class="line">            <span class="symbol">controller:</span> <span class="string">'HomeCtrl'</span></span><br><span class="line">        &#125;).</span><br><span class="line">        <span class="keyword">when</span>(<span class="string">'/signin'</span>, &#123;</span><br><span class="line">            <span class="symbol">templateUrl:</span> <span class="string">'partials/signin.html'</span>,</span><br><span class="line">            <span class="symbol">controller:</span> <span class="string">'HomeCtrl'</span></span><br><span class="line">        &#125;).</span><br><span class="line">        <span class="keyword">when</span>(<span class="string">'/signup'</span>, &#123;</span><br><span class="line">            <span class="symbol">templateUrl:</span> <span class="string">'partials/signup.html'</span>,</span><br><span class="line">            <span class="symbol">controller:</span> <span class="string">'HomeCtrl'</span></span><br><span class="line">        &#125;).</span><br><span class="line">        <span class="keyword">when</span>(<span class="string">'/me'</span>, &#123;</span><br><span class="line">            <span class="symbol">templateUrl:</span> <span class="string">'partials/me.html'</span>,</span><br><span class="line">            <span class="symbol">controller:</span> <span class="string">'HomeCtrl'</span></span><br><span class="line">        &#125;).</span><br><span class="line">        otherwise(&#123;</span><br><span class="line">            <span class="symbol">redirectTo:</span> <span class="string">'/'</span></span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<p>As you can easily understand in the above code, when you go to /, the home.html page will be rendered. Another example: if you go to /signup, signup.html will be rendered. This rendering operation will be done in the browser, not on the server-side.</p>
+<h1 id="Conclusion">Conclusion</h1><p>You can see how everything we discussed in this tutorial works into practice by checking out this working demo.</p>
+<p>Token-based authentication systems help you to construct an authentication/authorization system while you are developing client-independent services. By using this technology, you will just focus on your services (or APIs). </p>
+<p>The authentication/authorization part will be handled by the token-based authentication system as a layer in front of your services. You can access and use services from any client like web browsers, Android, iOS, or a desktop client.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mongodb/">Mongodb</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://huangshiyang.com/2015/06/18/Token-Based-Authentication-With-AngularJS-NodeJS/" data-title="Token-Based Authentication With AngularJS &amp; NodeJS | Huang Shiyang" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/06/18/intersection-of-two-list/"  title="intersection_of_two_list">
+ <strong>下一篇：</strong><br/> 
+ <span>intersection_of_two_list
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Traditional_Authentication_Systems"><span class="toc-number">1.</span> <span class="toc-text">Traditional Authentication Systems</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Token-Based_Authentication"><span class="toc-number">2.</span> <span class="toc-text">Token-Based Authentication</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JWT"><span class="toc-number">3.</span> <span class="toc-text">JWT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A_Practical_Example"><span class="toc-number">4.</span> <span class="toc-text">A Practical Example</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Advantages"><span class="toc-number">5.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#An_Example_Application"><span class="toc-number">6.</span> <span class="toc-text">An Example Application</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Heroku_Deployment"><span class="toc-number">6.1.</span> <span class="toc-text">Heroku Deployment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#token-based-auth-frontend"><span class="toc-number">6.2.</span> <span class="toc-text">token-based-auth-frontend</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Mongodb/" title="Mongodb">Mongodb<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sercle-net/" title="sercle.net">sercle.net<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LeetCode/" title="LeetCode">LeetCode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/diagram/" title="diagram">diagram<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sercle/" title="sercle">sercle<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huangshiyang.com" target="_blank" title="Huang Shiyang">Huang Shiyang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wp.huangshiyang.com" target="_blank" title="WordPress">WordPress</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://github.com/ShiyangHuang" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/#" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Huang Shiyang">Huang Shiyang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'hsygit';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
