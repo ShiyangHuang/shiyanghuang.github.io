@@ -1,0 +1,453 @@
+
+ <!DOCTYPE HTML>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>intersection_of_two_list | Huang Shiyang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Huang Shiyang">
+    
+
+    
+    <meta name="description" content="今天说个Easy题。但是，请用严肃的眼光看待它，因为方法真的很巧妙！题目叫Intersection of Two Linked Lists，题目并不很难，大家可以先随意感受一下。10分钟写不出来就缴枪吧，因为即便你写出来了，方法估计也不是什么可取的好办法，让他随风去吧。》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》先介绍题目：Write a program to f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="intersection_of_two_list">
+<meta property="og:url" content="https://huangshiyang.com/2015/06/18/intersection-of-two-list/index.html">
+<meta property="og:site_name" content="Huang Shiyang">
+<meta property="og:description" content="今天说个Easy题。但是，请用严肃的眼光看待它，因为方法真的很巧妙！题目叫Intersection of Two Linked Lists，题目并不很难，大家可以先随意感受一下。10分钟写不出来就缴枪吧，因为即便你写出来了，方法估计也不是什么可取的好办法，让他随风去吧。》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》先介绍题目：Write a program to f">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="intersection_of_two_list">
+<meta name="twitter:description" content="今天说个Easy题。但是，请用严肃的眼光看待它，因为方法真的很巧妙！题目叫Intersection of Two Linked Lists，题目并不很难，大家可以先随意感受一下。10分钟写不出来就缴枪吧，因为即便你写出来了，方法估计也不是什么可取的好办法，让他随风去吧。》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》先介绍题目：Write a program to f">
+
+    
+    <link rel="alternative" href="/#" title="Huang Shiyang" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="https://huangshiyang.com"><img src="/img/nav-logo.gif" alt="Huang Shiyang" title="Huang Shiyang"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Huang Shiyang">Huang Shiyang</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:huangshiyang.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/18/intersection-of-two-list/" title="intersection_of_two_list" itemprop="url">intersection_of_two_list</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Huang Shiyang" target="_blank" itemprop="author">Zhang Yang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-18T04:27:36.000Z" itemprop="datePublished"> Published 2015-06-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#球头麻袋！【日语音译：等等！】"><span class="toc-number">1.</span> <span class="toc-text">球头麻袋！【日语音译：等等！】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#大神告诉你，其实还有一种神奇的算法。"><span class="toc-number">1.1.</span> <span class="toc-text">大神告诉你，其实还有一种神奇的算法。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#【以下为背景介绍】"><span class="toc-number">1.1.1.</span> <span class="toc-text">【以下为背景介绍】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【以上为本世纪最大的hint】"><span class="toc-number">1.1.2.</span> <span class="toc-text">【以上为本世纪最大的hint】</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<p>今天说个Easy题。但是，请用严肃的眼光看待它，因为方法真的很巧妙！题目叫Intersection of Two Linked Lists，题目并不很难，大家可以先随意感受一下。10分钟写不出来就缴枪吧，因为即便你写出来了，方法估计也不是什么可取的好办法，让他随风去吧。<br>》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》<br>先介绍题目：Write a program to find the node at which the intersection of two singly linked lists begins.<br> For example, the following two linked lists:</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">A:</span>          a1 → a2</span><br><span class="line">                   ↘</span><br><span class="line">                     c1 → c2 → c3</span><br><span class="line">                   ↗            </span><br><span class="line"><span class="label">B:</span>     b1 → b2 → b3</span><br></pre></td></tr></table></figure>
+<p>begin to intersect at node c1.<br>意思就是：给出两个不同的list 返回第一个相同的节点（默认后面都相同，大大降低了难度，可以思考一下如果后面有可能不同咋办。）<br>》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》<br>EASY题这个帽子决定了我们几乎可以上来就写，毕竟考的不难嘛，仔细想想问题不大~</p>
+<p>动笔！<br>第一件事！null check，easy。但是与此同时，我的习惯是，再思考一下，什么情况下会返回null，而不是仅仅想一下输入是null怎么处理。</p>
+<p>顺着想下来，无外乎两种情况： 1，其中一个是null； 2，俩list完！全！不同。比如<br>1-&gt; 2 -&gt; 3-&gt; null  和  4-&gt; 5-&gt; 6-&gt; null  非要让你返回，那除了null，臣妾也想不到了。</p>
+<p>再接下来，步入正轨，解题。题目本身的难度决定了即使我们用最直白的方法解题，时间复杂度也不会很高，长驱直入即可：<br>既然要我们找到第一个公共的节点，最直观的想法就是，倒着数嘛！第一个不一样的后一个就是了！（这句话有点奇怪，仔细想想其实就是你脑子里的想法）然而，singly linkedlist并不能让我们简单的倒着数……recursive貌似可以，却得不偿失，pass！</p>
+<p>那退而求其次，倒着不能就顺着数。</p>
+<p>在此之前！首先思考一下，为什么我们愿意倒着数而不是正着数。原因有： 1，我们可以保证从结尾开始数，两个list末尾长度是一致的，不会出现类似扣子错位的情况； 2，我们保证后面是一样的，所以找第一个不一样的就好了，方便。</p>
+<p>照着这个思路去理解顺着数的问题，那就是：万一俩list长度不一样怎么办？【凉拌！】那就按短的那个算！长的那段截取！嘛！<br>说到这，大家都会了吧？两边遍历，第一遍找到两个长度，从公共长度开始比较，第一个相同的即是我们想要寻找的node，大功告成，提交开始下一道！撒花~鼓掌~啦啦啦~</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+<h1 id="球头麻袋！【日语音译：等等！】">球头麻袋！【日语音译：等等！】</h1><p>你以为我为什么要用这道简单题来说事？</p>
+<h2 id="大神告诉你，其实还有一种神奇的算法。">大神告诉你，其实还有一种神奇的算法。</h2><h3 id="【以下为背景介绍】">【以下为背景介绍】</h3><p>作为预备，看过Cracking coding interview 150的同学应该对一道题还有印象。给你两个string，a, b. 请你判断a是不是b的anagram。意思就是比如a=”abcdef” b=”defabc”. a是否由b从某一个char作为开始循环而来的。</p>
+<p>题目不难，直观做法为把string排序，然后俩一样即可。<br>（别以为我不知道你在想可以把a按各个字母开头循环一次，和b比较，我一开始也是这么想的。然后被作者提都不提一句的鄙视了，真是醉了。）</p>
+<p>同时作者又给出了 xyxy解题方案。意思为我们可以肯定如果ab是anagram的话，一定可以将a分割成xy两部分。比如上例中：a = “abc”+”def” = x + y，以保证b = y + x。 不用证明啦，想想就对~于是乎 我们把a重复两次，得到aa = xyxy = x + yx + x = x + b + x。<br>接下来判断b是不是a的一部分就好了。就问一句，吓人不吓人。被作者的智商活活碾压了十条街。<br>【以上为背景介绍】</p>
+<hr>
+<p>你想想这个背景，能用上么？</p>
+<h3 id="【以上为本世纪最大的hint】">【以上为本世纪最大的hint】</h3><p>我们把两个list， a 和 b 分别组成 ab 和 ba 【这明显和背景不一样啊……】【触类旁通啊！！】然后，奇迹就发生了。</p>
+<p>贴上代码，神算法要自己去体会，看不明白写两个list自己顺着代码比划比划。一会儿你就服了~</p>
+<p>（试试两个list完全不一样会怎么样，简直智能的快要飞起来了！）</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public ListNode getIntersectionNode(ListNode headA, ListNode headB) &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">headA =</span>= <span class="constant">null</span> || <span class="variable">headB =</span>= <span class="constant">null</span>) &#123;</span><br><span class="line">		return <span class="constant">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ListNode <span class="variable">a =</span> headA;</span><br><span class="line">	ListNode <span class="variable">b =</span> headB;</span><br><span class="line"></span><br><span class="line">	while (a != b) &#123;</span><br><span class="line">		<span class="variable">a =</span> <span class="variable">a =</span>= <span class="constant">null</span> ? headB : a.next;</span><br><span class="line">		<span class="variable">b =</span> <span class="variable">b =</span>= <span class="constant">null</span> ? headA : b.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>=====================================================================</p>
+<p>就是这么酷炫，选这道题的原因是：虽然题目本身并不难解决，但是仍然存在令人眼前一亮的算法方案。并且这是一个很值得推广的方法，把他记在脑子里，留有印象，一定会有很大的帮助。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/LeetCode/">LeetCode</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://huangshiyang.com/2015/06/18/intersection-of-two-list/" data-title="intersection_of_two_list | Huang Shiyang" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/06/18/Mongoose学习参考文档/"  title="Mongoose学习参考文档">
+ <strong>下一篇：</strong><br/> 
+ <span>Mongoose学习参考文档
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#球头麻袋！【日语音译：等等！】"><span class="toc-number">1.</span> <span class="toc-text">球头麻袋！【日语音译：等等！】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#大神告诉你，其实还有一种神奇的算法。"><span class="toc-number">1.1.</span> <span class="toc-text">大神告诉你，其实还有一种神奇的算法。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#【以下为背景介绍】"><span class="toc-number">1.1.1.</span> <span class="toc-text">【以下为背景介绍】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【以上为本世纪最大的hint】"><span class="toc-number">1.1.2.</span> <span class="toc-text">【以上为本世纪最大的hint】</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sercle-net/" title="sercle.net">sercle.net<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LeetCode/" title="LeetCode">LeetCode<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/diagram/" title="diagram">diagram<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sercle/" title="sercle">sercle<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Mongodb/" title="Mongodb">Mongodb<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://huangshiyang.com" target="_blank" title="Huang Shiyang">Huang Shiyang</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wp.huangshiyang.com" target="_blank" title="WordPress">WordPress</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://github.com/ShiyangHuang" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/#" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Huang Shiyang">Huang Shiyang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'huangshiyang';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
